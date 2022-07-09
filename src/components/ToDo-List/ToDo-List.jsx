@@ -8,8 +8,8 @@ const ToDoList = (props) => {
     {console.log({props, items: props.items})}
     return <div style={{ }}>
         {props.items && props.items.map((item, index) => <ToDoItem 
-                key={index}
-                item={item}>
+                key={item.id}
+                item={item}>{item.id}
         </ToDoItem>) }
     </div>
 }

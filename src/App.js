@@ -11,6 +11,7 @@ import {
 
 import logo from './logo.svg';
 import './App.css';
+import AddItem from './components/Add-Item/Add-Item';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/*<header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -42,9 +43,13 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+  </header>*/}
       {console.log({ items })}
-      a<ToDoList items={items}>a
+      <AddItem>
+
+      </AddItem>
+      <ToDoList 
+        items={items}>
 
       </ToDoList>
     </div>

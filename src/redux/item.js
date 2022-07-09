@@ -2,6 +2,7 @@ const GET_ITEMS_REQUESTED = 'GET_ITEMS_REQUESTED';
 const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
 const GET_ITEMS_FAILED = 'GET_ITEMS_FAILED';
 const TOGGLE_DONE = 'TOGGLE_DONE';
+const ADD_ITEM = 'ADD_ITEM';
 
 const initialState = {
     items: [{
@@ -57,6 +58,20 @@ export default function itemReducer(state = initialState, action) {
                 items: array
             }
         }
+        case ADD_ITEM: {
+            const { title } = action.payload;
+            console.log("add item", {payload: action.payload, title});
+            const array = state.items.concat({
+                text: title,
+                done: false,
+                id: Math.random()*6
+            });
+            console.log(array);
+            return {
+                ...state,
+                items: array
+            }
+        }
         default:
             return state
     }
@@ -91,8 +106,18 @@ export function toggleDone(title, prevValue) {
     return {
         type: TOGGLE_DONE,
         payload: {
-            title, prevValue
+            title, 
+            prevValue
         }
 
+    }
+}
+
+export function addItem(title) {
+    return {
+        type: ADD_ITEM,
+        payload: {
+            title
+        }
     }
 }
