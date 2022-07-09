@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import ToDoList from './components/ToDo-List/ToDo-List';
+
+import {
+  getItemsRequest,
+  getItemsSuccess,
+  getItemsFailed
+} from './redux/item';
 
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [items, setItems] = useState([{
-    text: "App with state",
-    done: true
-  },{
-    text: "App with redux",
-    done: false
-  }
-])
+  const dispatch = useDispatch();
+
+  const items = useSelector(store => store.items);
+  console.log({ items });
+
+  useEffect(() => {
+    const copy = [...items];
+    copy.push({
+      text: "Complete the demo",
+      done: false
+    });
+    dispatch(getItemsSuccess(copy));
+  }, []);
 
   return (
     <div className="App">
@@ -32,7 +43,7 @@ function App() {
           Learn React
         </a>
       </header>
-      {console.log({items})}
+      {console.log({ items })}
       a<ToDoList items={items}>a
 
       </ToDoList>
