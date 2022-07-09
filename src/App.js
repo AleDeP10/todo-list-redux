@@ -21,7 +21,7 @@ function App() {
   useEffect(() => {
     const copy = [...items];
     copy.push({
-      text: "Complete the demo",
+      text: "Introduce the form",
       done: false
     });
     dispatch(getItemsSuccess(copy));

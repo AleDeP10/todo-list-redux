@@ -1,6 +1,7 @@
-export const GET_ITEMS_REQUESTED = 'GET_ITEMS_REQUESTED';
-export const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
-export const GET_ITEMS_FAILED = 'GET_ITEMS_FAILED';
+const GET_ITEMS_REQUESTED = 'GET_ITEMS_REQUESTED';
+const GET_ITEMS_SUCCESS = 'GET_ITEMS_SUCCESS';
+const GET_ITEMS_FAILED = 'GET_ITEMS_FAILED';
+const TOGGLE_DONE = 'TOGGLE_DONE';
 
 const initialState = {
     items: [{
@@ -41,6 +42,21 @@ export default function itemReducer(state = initialState, action) {
                 loading: false,
                 error: action.payload.message,
             }
+        case TOGGLE_DONE: {
+            const { title, prevValue } = action.payload;
+            console.log("toggle done", { payload: action.payload, title, prevValue });
+            const array = [...state.items];
+            array.map(item => {
+                if (item.text === title) {
+                    item.done = !prevValue;
+                }
+                //return true;
+            });
+            return {
+                ...state,
+                items: array
+            }
+        }
         default:
             return state
     }
@@ -68,5 +84,15 @@ export function getItemsFailed(message, error) {
             message,
             error
         }
+    }
+}
+
+export function toggleDone(title, prevValue) {
+    return {
+        type: TOGGLE_DONE,
+        payload: {
+            title, prevValue
+        }
+
     }
 }
