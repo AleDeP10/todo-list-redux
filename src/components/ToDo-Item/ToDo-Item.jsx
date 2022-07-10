@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Children, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 
 import { toggleDone } from '../../redux/item';
@@ -18,6 +18,7 @@ const ToDoItem = (props) => {
             className={props.item.done?'done':'todo'}
             onClick={handleClick}>
         {props.item.text}
+        {props.children}
     </div>
 }
 
