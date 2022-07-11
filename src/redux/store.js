@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
-import itemReducer from './redux/item';
+import itemReducer from './item';
 
 const store = configureStore({ reducer: itemReducer })
 
-console.log(store.getState())
+export default store;

@@ -14,7 +14,6 @@ function App() {
   const dispatch = useDispatch();
 
   const items = useSelector(store => store.items);
-  console.log({ items });
 
   useEffect(() => {
     const copy = [...items];

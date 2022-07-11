@@ -6,20 +6,18 @@ import { toggleDone } from '../../redux/item';
 import './style.css';
 
 const ToDoItem = (props) => {
-    console.log({props, item: props.item, done: props.item.done})
-    
     const dispatch = useDispatch();
+    const { item } = props;
 
-    const handleClick = () => {
-        const { item } = props;
+    const handleClick = (event) => {
+        console.log("handleClick", { event, item });
         dispatch(toggleDone(item.id));
     }
 
     return <div 
-            className={props.item.done?'done':'todo'}
+            className={item.done?'done':'todo'}
             onClick={handleClick}>
-        {props.item.text}
-        {props.children}
+        {item.text}
     </div>
 }
 

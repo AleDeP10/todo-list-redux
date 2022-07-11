@@ -4,12 +4,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { configureStore } from '@reduxjs/toolkit'
-import itemReducer from './redux/item';
-
-const store = configureStore({ reducer: itemReducer })
-
-console.log(store.getState())
+import store from './redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
