@@ -24,6 +24,7 @@ const AddItem = (props) => {
         <input
             type='text'
             value={title}
+            placeholder='Enter your task here'
             onChange={handleChange}>
         </input>
         <input

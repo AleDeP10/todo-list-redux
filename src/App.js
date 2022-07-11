@@ -19,18 +19,20 @@ function App() {
   useEffect(() => {
     const copy = [...items];
     copy.push({
-      text: "Introduce the form",
+      text: 'Introduce the AddItem form',
       done: false,
-      id: Math.random()*6
+      id: Math.random()
     });
     dispatch(setItems(copy));
   }, []);
 
   return (
-    <div className="App">
+    <div className='App'>
+      <h3 className='title'>TODO LIST</h3>
       <AddItem>
 
       </AddItem>
+      <div className='spacer' />
       <ToDoList 
         items={items}>
 

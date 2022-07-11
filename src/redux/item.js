@@ -4,42 +4,39 @@ const ADD_ITEM = 'ADD_ITEM';
 
 const initialState = {
     items: [{
-        text: "App with state",
+        text: 'App with state',
         done: true,
-        id: Math.random()*6
+        id: Math.random()
     }, {
-        text: "App with redux",
+        text: 'App with redux',
         done: true,
-        id: Math.random()*6
+        id: Math.random()
     }, {
-        text: "App with backend",
+        text: 'App with backend',
         done: false,
-        id: Math.random()*6
-    }
-    ],
-    loading: false,
-    error: null
+        id: Math.random()
+    }]
 }
 
 export default function itemReducer(state = initialState, action) {
     console.log({ state, action });
     switch (action.type) {
         case SET_ITEMS:
-            console.log("set items", { payload: action.payload, items: action.payload.items });
+            console.log('set items', { payload: action.payload, items: action.payload.items });
             return {
                 ...state,
-                loading: false,
                 items: action.payload.items
             }
         case TOGGLE_DONE: {
-            const { title, prevValue } = action.payload;
-            console.log("toggle done", { payload: action.payload, title, prevValue });
-            const array = [...state.items];
-            array.map(item => {
-                if (item.text === title) {
-                    item.done = !prevValue;
+            const { id } = action.payload;
+            console.log('toggle done', { payload: action.payload, id });
+            const array = [];
+            state.items.map(item => {
+                const copy = {...item};
+                if (copy.id === id) {
+                    copy.done = !copy.done;
                 }
-                //return true;
+                array.push(copy);                
             });
             return {
                 ...state,
@@ -48,11 +45,11 @@ export default function itemReducer(state = initialState, action) {
         }
         case ADD_ITEM: {
             const { title } = action.payload;
-            console.log("add item", {payload: action.payload, title});
+            console.log('add item', {payload: action.payload, title});
             const array = state.items.concat({
                 text: title,
                 done: false,
-                id: Math.random()*6
+                id: Math.random()
             });
             console.log(array);
             return {
@@ -74,12 +71,11 @@ export function setItems(items) {
     }
 }
 
-export function toggleDone(title, prevValue) {
+export function toggleDone(id) {
     return {
         type: TOGGLE_DONE,
         payload: {
-            title, 
-            prevValue
+            id
         }
 
     }
