@@ -1,5 +1,6 @@
 .done {
     color: brown;
+    text-decoration: line-through
 }
 
 .todo {

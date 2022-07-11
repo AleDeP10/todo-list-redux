@@ -51,7 +51,6 @@ export default function itemReducer(state = initialState, action) {
                 done: false,
                 id: Math.random()
             });
-            console.log(array);
             return {
                 ...state,
                 items: array

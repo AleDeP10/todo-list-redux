@@ -11,13 +11,14 @@ const AddItem = (props) => {
     const [title, setTitle] = useState('');
 
     const handleChange = (event) => {
-        console.log("handleChange", { event });
+        console.log('handleChange', { event });
         setTitle(event.target.value);
     }
 
     const handleClick = (event) => {
-        console.log("handleClick", { event, title });
+        console.log('handleClick', { event, title });
         dispatch(addItem(title));
+        setTitle('');
     }
 
     return <div>
@@ -28,9 +29,10 @@ const AddItem = (props) => {
             onChange={handleChange}>
         </input>
         <input
-            type="button"
+            className='button'
+            type='button'
             onClick={handleClick}
-            value="Add To List">
+            value='Add To List'>
         </input>
     </div>
 }
