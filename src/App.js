@@ -9,6 +9,7 @@ import {
 } from './redux/item';
 
 import './App.css';
+import Header from './components/Header/header';
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ function App() {
 
   return (
     <div className='App'>
-      <h3 className='title'>TODO LIST</h3>
+      <Header>
+        
+      </Header>
       <AddItem>
 
       </AddItem>
