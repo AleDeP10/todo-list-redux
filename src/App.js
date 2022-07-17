@@ -10,11 +10,14 @@ import {
 
 import './App.css';
 import Header from './components/Header/header';
+import SignIn from './components/Sign-In/Sign-in';
 
 function App() {
   const dispatch = useDispatch();
 
   const items = useSelector(store => store.items);
+
+  const [logged, setLogged] = useState(false);
 
   useEffect(() => {
     const copy = [...items];
@@ -29,8 +32,9 @@ function App() {
   return (
     <div className='App'>
       <Header>
-        
       </Header>
+      {logged && 
+      <>
       <AddItem>
 
       </AddItem>
@@ -39,6 +43,8 @@ function App() {
         items={items}>
 
       </ToDoList>
+      </>}
+      {!logged && <SignIn></SignIn>}
     </div>
   );
 }
