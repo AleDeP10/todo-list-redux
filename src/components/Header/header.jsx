@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import './style.css';
 
 const Header = () => {
-    const items = useSelector(store => store.items);
+    const items = useSelector(store => store.item.items);
     const total = items.length;
 
     const [todo, setTodo] = useState(0);

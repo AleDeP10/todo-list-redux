@@ -42,11 +42,11 @@ export const db = getFirestore();
 export const createUserDocumentFromAuth = async (userAuth) => {
     const userDocRef = doc(db, 'users', userAuth.uid);
     console.log({ userDocRef });
-    
+
     const userSnapshot = await getDoc(userDocRef);
     console.log({ userSnapshot, exists: userSnapshot.exists() });
 
-    if(!userSnapshot.exists()) {
+    if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth;
         const createdAt = new Date();
 
@@ -56,10 +56,39 @@ export const createUserDocumentFromAuth = async (userAuth) => {
                 email,
                 createdAt
             });
-        } catch(error) {
+        } catch (error) {
             console.log('error creating the user', error.message);
+        }
+
+        console.log({ userId: userDocRef._key.path.segments[1] });
+        const listDocRef = doc(db, 'list', userDocRef._key.path.segments[1]);
+        console.log({ listDocRef });
+
+        const listSnapshot = await getDoc(listDocRef);
+        console.log({ listSnapshot, exists: listSnapshot.exists() });
+
+        if (!listSnapshot.exists()) {
+            try {
+                await setDoc(listDocRef, {
+                    items: []
+                });
+            } catch (error) {
+                console.log('error creating the todo list', error.message);
+            }
         }
     }
 
     return userDocRef;
+}
+
+export const getUserSnapshot = async (userDocRef) => {
+    const userSnapshot = await getDoc(userDocRef);
+    console.log({ userSnapshot, exists: userSnapshot.exists() });
+
+    return userSnapshot;
+}
+
+export const getListSnapshot = async (userDocRef) => {
+    const listDocRef = doc(db, 'list', userDocRef.uid);
+    console.log({ listDocRef });
 }
