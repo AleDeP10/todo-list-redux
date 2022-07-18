@@ -6,12 +6,12 @@ const initialState = {
         email: null,
         createdAt: null
     },
-    logged: false
+    userRef: null
 }
 
 export default function userReducer(state = initialState, action) {
     console.log({ state, action });
-    const {type, payload} = action;
+    const { type, payload } = action;
     switch (type) {
         case SET_USER_DATA:
             const user = {
@@ -22,13 +22,13 @@ export default function userReducer(state = initialState, action) {
             return {
                 ...state,
                 user: user,
-                logged: true,
+                userRef: payload.userRef
             }
-        default: 
+        default:
             return state;
     }
 }
 
-export function setUserData(displayName, email, createdAt) {
-    return {type: SET_USER_DATA, payload: {displayName, email, createdAt}}
+export function setUserData(displayName, email, createdAt, userRef) {
+    return { type: SET_USER_DATA, payload: { displayName, email, createdAt, userRef } }
 }

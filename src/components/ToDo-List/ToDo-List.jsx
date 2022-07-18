@@ -1,15 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ToDoItem from '../ToDo-Item/ToDo-Item';
 
+import { 
+    getListSnapshot,
+    getList 
+} from '../../utils/firebase';
+
+import { setItems } from '../../redux/item';
+
 import './style.css';
 
-const ToDoList = (props) => {
-    return <div style={{ }}>
-        {props.items && props.items.map((item, index) => <ToDoItem 
-                key={item.id}
-                item={item}>
-        </ToDoItem>) }
+const ToDoList = () => {
+    const dispatch = useDispatch();
+    const userRef = useSelector(store => store.user.userRef);
+    const items = useSelector(store => store.item.items);
+    
+    useEffect(() => {
+        const getTodoList = async () => {
+            const listSnapshot = await getListSnapshot(userRef);
+            console.log({ listSnapshot });
+            const list = await getList(userRef);
+            console.log({ list });
+            dispatch(setItems(list.items));
+        }
+        if (userRef) {
+            getTodoList();
+        }
+    }, [userRef])
+
+
+    return <div style={{}}>
+        {items && items.map((item) => <ToDoItem
+            key={item.id}
+            item={item}>
+        </ToDoItem>)}
     </div>
 }
 

@@ -10,7 +10,11 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc
+    setDoc,
+    collection,
+    query,
+    getDocs,
+    where
 } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
@@ -60,8 +64,9 @@ export const createUserDocumentFromAuth = async (userAuth) => {
             console.log('error creating the user', error.message);
         }
 
-        console.log({ userId: userDocRef._key.path.segments[1] });
-        const listDocRef = doc(db, 'list', userDocRef._key.path.segments[1]);
+        const userId = userDocRef._key.path.segments[1];
+        console.log({ userId });
+        const listDocRef = doc(db, 'list', userId);
         console.log({ listDocRef });
 
         const listSnapshot = await getDoc(listDocRef);
@@ -70,7 +75,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         if (!listSnapshot.exists()) {
             try {
                 await setDoc(listDocRef, {
-                    items: []
+                    items: [],
+                    userId
                 });
             } catch (error) {
                 console.log('error creating the todo list', error.message);
@@ -88,7 +94,38 @@ export const getUserSnapshot = async (userDocRef) => {
     return userSnapshot;
 }
 
-export const getListSnapshot = async (userDocRef) => {
-    const listDocRef = doc(db, 'list', userDocRef.uid);
+export const getListSnapshot = async (userRef) => {
+    const listDocRef = doc(db, 'list', userRef);
     console.log({ listDocRef });
+
+    const listSnapshot = await getDoc(listDocRef);
+    console.log({ listSnapshot, exists: listSnapshot.exists() });
+
+    //console.log({ items: listSnapshot.document.data.value.mapValue.fields.items });
+    return listSnapshot;
+}
+
+export const getList = async (userRef) => {
+    console.log("getList", userRef);
+
+    const list = [];
+    try {
+        const listQuery = query(
+            collection(db, 'list'),
+            where('userId', '==', userRef)
+        )
+
+        const listSnapshot = await getDocs(listQuery);
+        console.log({listQuery, listSnapshot});
+
+        listSnapshot.forEach((doc) => {
+            const data = doc.data();
+            console.log(doc.id, " => ", data);
+            list.push(data);
+        });
+    } catch(error) {
+        console.log('error while retrieving todo list', error.message);
+    }
+
+    return list[0];
 }

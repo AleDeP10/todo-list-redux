@@ -32,11 +32,11 @@ export default function itemReducer(state = initialState, action) {
             console.log('toggle done', { payload: action.payload, id });
             const array = [];
             state.items.map(item => {
-                const copy = {...item};
+                const copy = { ...item };
                 if (copy.id === id) {
                     copy.done = !copy.done;
                 }
-                array.push(copy);                
+                array.push(copy);
             });
             return {
                 ...state,
@@ -45,7 +45,7 @@ export default function itemReducer(state = initialState, action) {
         }
         case ADD_ITEM: {
             const { title } = action.payload;
-            console.log('add item', {payload: action.payload, title});
+            console.log('add item', { payload: action.payload, title });
             const array = state.items.concat({
                 text: title,
                 done: false,
@@ -62,6 +62,7 @@ export default function itemReducer(state = initialState, action) {
 }
 
 export function setItems(items) {
+    console.log('setItems', items);
     return {
         type: SET_ITEMS,
         payload: {

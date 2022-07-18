@@ -9,28 +9,27 @@ import SignIn from './components/Sign-In/Sign-in';
 import './App.css';
 
 function App() {
-  const items = useSelector(store => store.item.items);
-  const logged = useSelector(store => store.user.logged);
-  
+
+
   return (
     <div className='App'>
       <SignIn>
 
       </SignIn>
+
       <Header>
-        
+
       </Header>
-      {logged && 
-      <>
+      
       <AddItem>
 
       </AddItem>
+
       <div className='spacer' />
-      <ToDoList 
-        items={items}>
+
+      <ToDoList>
 
       </ToDoList>
-      </>}
     </div>
   );
 }
