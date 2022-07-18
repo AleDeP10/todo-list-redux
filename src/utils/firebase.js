@@ -106,7 +106,7 @@ export const getListSnapshot = async (userRef) => {
 }
 
 export const getList = async (userRef) => {
-    console.log("getList", userRef);
+    console.log('getList', userRef);
 
     const list = [];
     try {
@@ -128,4 +128,20 @@ export const getList = async (userRef) => {
     }
 
     return list[0];
+}
+
+export const setList = async (userRef, items) => {
+    console.log('setList', userRef, items);
+
+    const listDocRef = doc(db, 'list', userRef);
+    console.log({ listDocRef });
+
+    try {
+        await setDoc(listDocRef, {
+            items,
+            userId: userRef
+        });
+    } catch(error) {
+        console.log('error while updating the todo list', error.message);
+    }
 }

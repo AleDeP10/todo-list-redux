@@ -1,3 +1,5 @@
+import { setList } from '../utils/firebase';
+
 const SET_ITEMS = 'SET_ITEMS';
 const TOGGLE_DONE = 'TOGGLE_DONE';
 const ADD_ITEM = 'ADD_ITEM';

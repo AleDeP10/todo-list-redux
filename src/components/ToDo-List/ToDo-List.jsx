@@ -5,7 +5,8 @@ import ToDoItem from '../ToDo-Item/ToDo-Item';
 
 import { 
     getListSnapshot,
-    getList 
+    getList, 
+    setList
 } from '../../utils/firebase';
 
 import { setItems } from '../../redux/item';
@@ -28,8 +29,11 @@ const ToDoList = () => {
         if (userRef) {
             getTodoList();
         }
-    }, [userRef])
+    }, [userRef]);
 
+    useEffect(() => {
+        setList(userRef, items);
+    }, [items]);
 
     return <div style={{}}>
         {items && items.map((item) => <ToDoItem
