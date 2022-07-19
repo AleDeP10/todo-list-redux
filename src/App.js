@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import ToDoList from './components/ToDo-List/ToDo-List';
@@ -10,6 +9,7 @@ import './App.css';
 
 function App() {
 
+  const userRef = useSelector(store => store.user.userRef)
 
   return (
     <div className='App'>
@@ -17,16 +17,20 @@ function App() {
 
       </SignIn>
 
-      <Header>
+      {userRef &&
+        <>
+          <Header>
 
-      </Header>
+          </Header>
+
+          <AddItem>
+
+          </AddItem>
+
+          <div className='spacer' />
+        </>
+      }
       
-      <AddItem>
-
-      </AddItem>
-
-      <div className='spacer' />
-
       <ToDoList>
 
       </ToDoList>

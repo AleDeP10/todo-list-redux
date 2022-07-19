@@ -32,7 +32,12 @@ const ToDoList = () => {
     }, [userRef]);
 
     useEffect(() => {
-        setList(userRef, items);
+        const setTodoList = async () => {
+            await setList(userRef, items);
+        }
+        if (userRef) {
+            setTodoList();
+        }
     }, [items]);
 
     return <div style={{}}>

@@ -37,11 +37,11 @@ const SignIn = () => {
             <div>&nbsp;</div>
             <div>
                 {userRef ?
-                    <span>{user.displayName}&nbsp;</span> :
+                    <span>{user.displayName}</span> :
                     <button onClick={logGoogleUser}>
                         Sign in with Google Popup
                     </button>
-                }
+                }&nbsp;
             </div>
 
         </div>

@@ -1,23 +1,9 @@
-import { setList } from '../utils/firebase';
-
 const SET_ITEMS = 'SET_ITEMS';
 const TOGGLE_DONE = 'TOGGLE_DONE';
 const ADD_ITEM = 'ADD_ITEM';
 
 const initialState = {
-    items: [{
-        text: 'App with state',
-        done: true,
-        id: Math.random()
-    }, {
-        text: 'App with redux',
-        done: true,
-        id: Math.random()
-    }, {
-        text: 'App with backend',
-        done: false,
-        id: Math.random()
-    }]
+    items: []
 }
 
 export default function itemReducer(state = initialState, action) {
