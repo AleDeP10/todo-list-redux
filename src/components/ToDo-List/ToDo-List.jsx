@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import ToDoItem from '../ToDo-Item/ToDo-Item';
 
 import { 
-    getListSnapshot,
     getList, 
     setList
 } from '../../utils/firebase';
@@ -20,8 +19,6 @@ const ToDoList = () => {
     
     useEffect(() => {
         const getTodoList = async () => {
-            const listSnapshot = await getListSnapshot(userRef);
-            console.log({ listSnapshot });
             const list = await getList(userRef);
             console.log({ list });
             dispatch(setItems(list.items));

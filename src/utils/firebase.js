@@ -92,17 +92,6 @@ export const getUserSnapshot = async (userDocRef) => {
     return userSnapshot;
 }
 
-export const getListSnapshot = async (userRef) => {
-    const listDocRef = doc(db, 'list', userRef);
-    console.log({ listDocRef });
-
-    const listSnapshot = await getDoc(listDocRef);
-    console.log({ listSnapshot, exists: listSnapshot.exists() });
-
-    //console.log({ items: listSnapshot.document.data.value.mapValue.fields.items });
-    return listSnapshot;
-}
-
 export const getList = async (userRef) => {
     console.log('getList', userRef);
 
