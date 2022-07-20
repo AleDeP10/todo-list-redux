@@ -14,13 +14,14 @@ import {
     getDocs,
     where
 } from 'firebase/firestore'
+import { firebase } from '../env';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: 'AIzaSyDyHDNYdocxfLFhlr36zxYlLSNGrHCwsdE',
-    authDomain: 'todo-list-redux-2be9c.firebaseapp.com',
-    databaseURL: 'https://todo-list-redux-2be9c-default-rtdb.europe-west1.firebasedatabase.app',
+    apiKey: firebase.apiKey,
+    authDomain: firebase.authDomain,
+    databaseURL: firebase.databaseURL,
     projectId: 'todo-list-redux-2be9c',
     storageBucket: 'todo-list-redux-2be9c.appspot.com',
     messagingSenderId: '902925548610',
